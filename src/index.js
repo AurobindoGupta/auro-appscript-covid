@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import "react-bootstrap"
+
+import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
