@@ -1,14 +1,26 @@
 import { Bar } from 'react-chartjs-2';
 const DisplayData=(props)=>{
+    let abc;
+    const api = "https://data.covid19india.org/v4/min/data.min.json";
+    const apiHandler = async (api) => {
+        abc = await fetch(api).then((res) => res.json());
+   
+       
+     };
+     apiHandler(api);
 return(
     <div>
-       <Bar
+    {props.allNames.map((item,key)=>{
+       console.log(abc);
+        return (<div>
+           
+            <Bar
            data={{
                labels:['Red','Green'],
                datasets:[
                    {
-                       label: 'State Name',
-                       data: [10,20],
+                       label: {item},
+                       data: [],
                        backgroundColor: ['red','green'],
                    }
                ]
@@ -22,6 +34,10 @@ return(
                 maintainAspectRatio: false,
             }}
        />
+        </div> )   
+        
+    })}
+       
     </div>
 )
 }
