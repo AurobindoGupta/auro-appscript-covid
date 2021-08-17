@@ -3,17 +3,18 @@ import { useState } from "react";
 import { Container, Form } from "react-bootstrap";
 import DisplayData from "./DisplayData";
 
-const api = "https://api.covid19india.org/v4/min/timeseries.min.json";
+const api = "https://data.covid19india.org/v4/min/data.min.json";
 const StateSelect = () => {
   const [selectAll, SetSelectAll] = useState(true);
   const [selectIndi, SetSelectIndi] = useState(true);
-
+let abc;
   const stateNames=["AN","AP","AR","AS","BR","CH","CT","DL","DN","GA","GJ","HP","HR","JH",
                     "JK","KA","KL","LA","LD","MH","ML","MN","MP","MZ","NL","OR","PB","PY","RJ","SK",
                     "TG","TN","TR","TT","UN","UP","UT","WB"];
+ const selectedStateNames=[];
 
   const apiHandler = async (api) => {
-    const abc = await fetch(api).then((res) => res.json());
+     abc = await fetch(api).then((res) => res.json());
 
     console.log(abc);
   };
@@ -48,12 +49,12 @@ const stateNameHandler=()=>{
             checked={selectAll}
           />
           <div>
-          {stateNames.map((item) =>{
+          {stateNames.map((item,key) =>{
              return <div>
                         <Form.Check
                             type="checkbox"
                             label={item}
-                            id={item}
+                            id={key}
                             onChange={stateNameHandler}
                             checked={selectIndi}
                             />
@@ -63,7 +64,7 @@ const stateNameHandler=()=>{
         </Form.Group>
       </Container>
       <Container>
-          <DisplayData all={selectAll}/>
+          <DisplayData all={selectAll? stateNames: selectedStateNames} data={abc}/>
       </Container>
     </div>
   );
