@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import DisplayData from "./DisplayData";
 
-
+const api = "https://data.covid19india.org/v4/min/data.min.json";
 const StateSelect = () => {
   const [selectAll, SetSelectAll] = useState(true);
   const [selectIndi, SetSelectIndi] = useState(true);
@@ -12,17 +12,37 @@ let abc;
                     "JK","KA","KL","LA","LD","MH","ML","MN","MP","MZ","NL","OR","PB","PY","RJ","SK",
                     "TG","TN","TR","TT","UN","UP","UT","WB"];
  const selectedStateNames=[];
+ const [confirmedCases, SetConfirmedCases]= useState([]);
 
-  
+ const apiHandler = async (api) => {
+  return await fetch(api).then((res) => res.json());
+ 
+};
   const btnHandlerAll = () => {
    
     SetSelectAll(!selectAll);
     SetSelectIndi(!selectAll);
-
-    
+    dataCleaning();
+      
   };
+  const dataCleaning=async ()=>{
+    abc = await apiHandler(api)
+    // JSON.stringify(abc)
+     Object.keys(abc).map((item,id)=>{
+       let x = item;
+      //  console.log(x)
+      // return console.log(abc[item].total.confirmed);
+      let newarr = [abc[item].total.confirmed];
+          
+            SetConfirmedCases(arr=>[...arr, newarr ]);
+          
+      })
+  }
+  
   console.log(selectAll);
-
+ 
+//  console.log(apiHandler(api));
+ 
 const stateNameHandler=()=>{
 
         // if(selectAll=== true){
@@ -32,11 +52,11 @@ const stateNameHandler=()=>{
         //     SetSelectIndi(false)
         // }
 }
-
+console.log(confirmedCases);
   return (
     <div className="stateSelect">
     <Row>
-    <Col lg='2' className="border border-dark">
+    <Col xs='2' className="border border-dark">
             <Container>
                 <Form.Group controlId="formBasicCheckbox">
                 <Form.Check
@@ -62,7 +82,7 @@ const stateNameHandler=()=>{
                 </Form.Group>
             </Container>
         </Col>
-        <Col >
+        <Col  xs='10'>
         <Container className="border border-dark">
             <DisplayData allNames={selectAll? stateNames: selectedStateNames} data={abc}/>
         </Container>

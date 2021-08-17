@@ -1,30 +1,28 @@
 import { Bar } from 'react-chartjs-2';
 const DisplayData=(props)=>{
-    let abc;
-    const api = "https://data.covid19india.org/v4/min/data.min.json";
-    const apiHandler = async (api) => {
-        abc = await fetch(api).then((res) => res.json());
-   
-       
-     };
-     apiHandler(api);
+ 
+  
+ 
+     
 return(
     <div>
     {props.allNames.map((item,key)=>{
-       console.log(abc);
+        
+        let abc = props.abc;
         return (<div>
            
             <Bar
-           data={{
-               labels:['Red','Green'],
-               datasets:[
-                   {
-                       label: {item},
-                       data: [],
-                       backgroundColor: ['red','green'],
-                   }
-               ]
-           }}
+                data={{
+                        labels:['Red','Green'],
+                        datasets:[
+                            {
+                                label: {item},
+                                data: [abc],
+                                backgroundColor: ['red','green','blue' , 'black'],
+
+                            }
+                        ],
+                }}
 
            height={50}
            width={100}

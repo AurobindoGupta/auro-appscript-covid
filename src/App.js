@@ -12,7 +12,7 @@ function App() {
      <Container fluid className="border border-dark d-flex justify-content-end">
        <input type="date" ></input>
      </Container>
-     <Container >
+     <Container fluid className=" ">
       <StateSelect/>
      </Container>
     </div>
