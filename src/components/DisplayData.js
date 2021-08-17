@@ -17,7 +17,7 @@ return(
                         datasets:[
                             {
                                 label: {item},
-                                data: [abc],
+                                data: [props.data[key]],
                                 backgroundColor: ['red','green','blue' , 'black'],
 
                             }

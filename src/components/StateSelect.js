@@ -12,7 +12,7 @@ let abc;
                     "JK","KA","KL","LA","LD","MH","ML","MN","MP","MZ","NL","OR","PB","PY","RJ","SK",
                     "TG","TN","TR","TT","UN","UP","UT","WB"];
  const selectedStateNames=[];
- const [confirmedCases, SetConfirmedCases]= useState([]);
+ const [confirmedCases, SetConfirmedCases]= useState([40]);
 
  const apiHandler = async (api) => {
   return await fetch(api).then((res) => res.json());
@@ -84,7 +84,7 @@ console.log(confirmedCases);
         </Col>
         <Col  xs='10'>
         <Container className="border border-dark">
-            <DisplayData allNames={selectAll? stateNames: selectedStateNames} data={abc}/>
+            <DisplayData allNames={selectAll? stateNames: selectedStateNames} data={confirmedCases}/>
         </Container>
         </Col>
       </Row>
