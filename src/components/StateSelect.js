@@ -21,17 +21,18 @@ let abc;
  
  
  const [confirmedCases, SetConfirmedCases]= useState([]);
-
+//default allselect checkboxes
  useEffect(() => {
    SetSelectState(stateNames);
    dataCleaning();
  }, [])
-
+//get data from api
  const apiHandler = async (api) => {
   return await fetch(api).then((res) => res.json());
  
 };
   
+//sorting through data separating confirmed cases total, also tried to separate selected states wwas unsuccesful
   const dataCleaning=async ()=>{
     abc = await apiHandler(api)
     
@@ -46,6 +47,7 @@ let abc;
              
          })
       }
+      //tried to separate selected individual states data
       else{
         selectState.map((stname)=>{
           if(stname.isChecked === true ){
@@ -61,7 +63,7 @@ let abc;
   
 
  
-
+//checkbox handler
 const checkHandler=(e)=>{
    const { name, checked} = e.target;
 
@@ -118,7 +120,7 @@ const checkHandler=(e)=>{
         </Col>
         <Col  xs='10'>
         <Row>
-                <PanelInfodata num={selectIndi}/>
+                <PanelInfodata num="selected state data"/>
         </Row>
         <Row>
           <Container className="border border-dark">
