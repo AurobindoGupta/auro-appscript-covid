@@ -6,7 +6,7 @@ const DisplayData=(props)=>{
      
 return(
     <div>
-    {props.allNames.map((item,key)=>{
+    {props.data.map((item,key)=>{
         
         let abc = props.abc;
         return (<div>
@@ -17,7 +17,7 @@ return(
                         datasets:[
                             {
                                 label: {item},
-                                data: [props.data[key]],
+                                data: [item],
                                 backgroundColor: ['red','green','blue' , 'black'],
 
                             }
