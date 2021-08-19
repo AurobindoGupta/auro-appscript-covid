@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
+
 import DisplayData from "./DisplayData";
 import PanelInfodata from "./PanelInfoData";
 
@@ -14,10 +15,11 @@ const stateNames= [ {name:"AN", isChecked: true} , {name: "AP", isChecked: true 
   const api = "https://data.covid19india.org/v4/min/data.min.json";
 const StateSelect = () => {
   const [selectAll, SetSelectAll] = useState(true);
-  // const [selectIndi, SetSelectIndi] = useState([]);
+  const [selectIndi, SetSelectIndi] = useState([]);
   const [selectState, SetSelectState] = useState([])
 let abc;
-  let selectIndi = [];
+let timer;
+  
  
  
  const [confirmedCases, SetConfirmedCases]= useState([]);
@@ -48,23 +50,24 @@ let abc;
          })
       }
       //tried to separate selected individual states data
-      else{
-        selectState.map((stname)=>{
-          if(stname.isChecked === true ){
-           selectIndi.push(stname);
-          }
-          else{
-            selectIndi.pop(stname);
-          }
-        })
+      // else{
+      //   selectState.map((stname)=>{
+      //     if(stname.isChecked === true ){
+      //      selectIndi.push(stname);
+      //     }
+      //     else{
+      //       selectIndi.pop(stname);
+      //     }
+      //   })
         
-      }
+      // }
   }
   
 
  
 //checkbox handler
 const checkHandler=(e)=>{
+  
    const { name, checked} = e.target;
 
   if(name === "selectAll"){
@@ -74,16 +77,32 @@ const checkHandler=(e)=>{
       SetSelectState(tempState);
   }
    else{
+    
     let tempState = selectState.map((stname)=>{
       return stname.name === name ? { ...stname, isChecked: checked} : stname
      }
        
      );
-     
+     clearTimeout(timer);
+     timer = setTimeout(() => {
+      indiSelectState(tempState);
+     }, 10000);
      SetSelectState(tempState);
-   }
-   
-};
+     
+    };
+}
+  const indiSelectState=(tempst)=>{
+    
+    tempst.map((item)=>{
+      if (item.isChecked===true){
+        console.log(item);
+       SetSelectIndi(prev=>[...prev, item])
+        
+      }
+     
+    })
+    console.log(selectIndi); 
+  }
 
   return (
     <div className="stateSelect">

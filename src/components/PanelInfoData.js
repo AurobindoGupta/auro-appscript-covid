@@ -3,7 +3,7 @@ import { Col, Row, Form } from "react-bootstrap"
 // information panel
 const PanelInfodata = (props) =>{
     let c= props.num
-    console.log(c.length);
+    // console.log(c.length);
     return(
         <div>
         <Row>

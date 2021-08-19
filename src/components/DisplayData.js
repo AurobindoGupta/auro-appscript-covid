@@ -6,21 +6,23 @@ const DisplayData=(props)=>{
      
 return(
     <div>
-    {props.data.map((item,key)=>{
+    
         
-        let abc = props.abc;
-        return (<div>
+       
+        <div>
            
             <Bar
                 data={{
                         labels:['Red','Green'],
-                        datasets:[
-                            {
-                                label: {item},
-                                data: [item],
+                        datasets:[props.data.map((item)=>{
+                            return {
+                                label: "stuff",
+                                data: {item},
                                 backgroundColor: ['red','green','blue' , 'black'],
 
                             }
+                        }) 
+                            
                         ],
                 }}
 
@@ -32,9 +34,9 @@ return(
                 maintainAspectRatio: false,
             }}
        />
-        </div> )   
         
-    })}
+        
+        </div>
        
     </div>
 )
